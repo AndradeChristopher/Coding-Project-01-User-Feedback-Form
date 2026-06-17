@@ -88,6 +88,6 @@ form.addEventListener("click", (event) => {
 });
 
 // Sample Keyboard Event
-document.getElementById("name").addEventListener("keydown", (event) => {
-    console.log(`Key pressed: ${event.key}`);
+document.addEventListener("keydown", function(event) {
+    console.log("Key pressed: " + event.key);
 });
