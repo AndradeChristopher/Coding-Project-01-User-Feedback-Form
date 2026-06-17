@@ -37,3 +37,13 @@ form.addEventListener("mouseover", (event) => {
         tooltip.style.top = event.pageY + 8 + "px";
     }
 });
+
+// No Mouse, Go Away
+form.addEventListener("mouseout", (event) => {
+    if (
+        event.target.tagName === "INPUT" ||
+        event.target.tagName === "TEXTAREA"
+    ) {
+        tooltip.style.display = "none";
+    }
+});
