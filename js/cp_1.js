@@ -38,7 +38,7 @@ form.addEventListener("mouseover", (event) => {
     }
 });
 
-// No Mouse, Go Away
+// No Mouse on Input or Textarea, Go Away
 form.addEventListener("mouseout", (event) => {
     if (
         event.target.tagName === "INPUT" ||
@@ -46,4 +46,48 @@ form.addEventListener("mouseout", (event) => {
     ) {
         tooltip.style.display = "none";
     }
+});
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const comment = comments.value.trim();
+    
+    // Fill the Stuff Out!
+    if (!name || !email || !comment) {
+        message.textContent = "All fields are required.";
+        return;
+    }
+
+    message.textContent = "";
+
+    const feedbackEntry = document.createElement("div");
+    feedbackEntry.classList.add("feedback-entry");
+
+    feedbackEntry.innerHTML = `
+        <h3>${name}</h3>
+        <p><strong>Email:</strong> ${email}</p>
+        <p>${comment}</p>
+    `;
+
+    feedbackDisplay.appendChild(feedbackEntry);
+
+    form.reset();
+    charCount.textContent = "Characters: 0";
+});
+
+// Prevent background clicks from triggering form-related events using stopPropagation()
+document.body.addEventListener("click", () => {
+    console.log("Background clicked");
+});
+
+form.addEventListener("click", (event) => {
+    event.stopPropagation();
+});
+
+// Sample Keyboard Event
+document.getElementById("name").addEventListener("keydown", (event) => {
+    console.log(`Key pressed: ${event.key}`);
 });
